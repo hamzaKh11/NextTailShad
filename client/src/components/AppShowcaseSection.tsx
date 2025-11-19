@@ -1,80 +1,62 @@
-import { Zap, ArrowRight, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils"; // Standard Shadcn utility (optional if you don't have it, remove usage)
 
 export function AppShowcaseSection() {
-  const scrollToEditor = () => {
-    // Make sure your editor section has id="video-editor" or change this to "editor"
-    const element = document.getElementById("video-editor");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative pt-10 pb-10 overflow-hidden bg-white/90">
-      {/* --- AMBIENT BACKGROUND GLOW & TEXTURE --- */}
-      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-        {/* Subtle Indigo/Purple Blur Blobs */}
-        <div className="absolute top-0 left-[-20%] w-[600px] h-[600px] bg-indigo-200/50 rounded-full blur-[100px] mix-blend-multiply opacity-50" />
-        <div className="absolute bottom-0 right-[-20%] w-[600px] h-[600px] bg-purple-200/50 rounded-full blur-[100px] mix-blend-multiply opacity-50" />
-
-        {/* Subtle Diagonal Lines for Texture */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-5"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="diagonalLines"
-              width="10"
-              height="10"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2"
-                stroke="#4f46e5"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#diagonalLines)" />
-        </svg>
+    <section className="relative py-12 overflow-hidden bg-background">
+      {/* --- 1. MINIMAL AMBIENT LIGHT (No heavy patterns) --- */}
+      <div className="absolute inset-0 pointer-events-none flex justify-center">
+        {/* A single, soft, static glow behind the image */}
+        <div className="h-[400px] w-[80%] max-w-[800px]  rounded-full dark:bg-primary/10" />
       </div>
 
-      <div className="container mx-auto px-2 text-center relative z-10">
-        {/* --- SPOTLIGHT IMAGE SHOWCASE --- */}
-        {/* max-w-4xl prevents the image from stretching and looking pixelated */}
-        <div className="relative group max-w-4xl mx-auto transform hover:scale-[1.005] transition-transform duration-500 ease-out perspective-1000">
-          {/* 1. BLURRED AURA (Hides pixelation & adds glow) */}
-          <div className="absolute inset-0 filter blur-3xl opacity-60 transition-opacity duration-500">
-            <img
-              src="/showcase.jpg"
-              alt="Blurred Editor Background"
-              className="w-full h-full object-cover rounded-3xl"
-            />
-          </div>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* --- 2. THE STABLE FRAME (No tilting, no jumping) --- */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* The Border/Container - purely structural, no heavy shadows */}
+          <div className="rounded-xl border border-border/40 bg-card/50 backdrop-blur-sm p-2 md:p-3">
+            {/* Inner Content: The "Browser" Window */}
+            <div className="relative rounded-lg overflow-hidden border border-border/50 bg-background shadow-sm">
+              {/* Sleek Minimal Header */}
+              <div className="flex items-center px-4 py-3 border-b border-border/40 bg-muted/20">
+                {/* Subtle Window Controls */}
+                <div className="flex gap-2 opacity-80">
+                  <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
+                </div>
 
-          {/* 2. MAIN FOCUSED IMAGE FRAME */}
-          <div className="relative rounded-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-slate-100/80 bg-white/95 backdrop-blur-md transform rotate-x-3 hover:rotate-x-0 transition-all duration-700 ease-in-out">
-            {/* Window Controls Header */}
-            <div className="absolute top-0 left-0 right-0 h-8 md:h-10 bg-slate-50 border-b border-slate-100 flex items-center px-4 rounded-t-xl z-10">
-              <div className="flex gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                {/* Optional: Centered "Tab" or Title - Very subtle */}
+                <div className="mx-auto">
+                  <div className="h-1.5 w-16 rounded-full bg-muted-foreground/10" />
+                </div>
+              </div>
+
+              {/* The Image Area */}
+              <div className="relative bg-muted/10">
+                {/* Image */}
+                <img
+                  src="/showcase.jpg"
+                  alt="App Interface"
+                  className="w-full h-auto block"
+                  style={{ imageRendering: "auto" }}
+                />
+
+                {/* --- THE "FADE" OVERLAY --- 
+                   This makes the bottom of the image blend seamlessly into the page,
+                   creating a very smooth, professional look. 
+                   If you don't want the fade, remove this div.
+                */}
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent opacity-20" />
               </div>
             </div>
-
-            {/* The Actual Screenshot */}
-            {/* Padding top (pt-8) pushes image down below the window controls */}
-            <div className="pt-8 md:pt-10 rounded-xl overflow-hidden">
-              <img
-                src="/showcase.jpg"
-                alt="ClipFlow Dashboard"
-                className="w-full h-auto object-cover"
-              />
-            </div>
           </div>
+
+          {/* Optional: A subtle reflection below (The "Apple" style floor reflection) */}
+          {/* This adds depth without moving the element */}
+          <div
+            className="absolute -bottom-4 left-4 right-4 h-4 bg-primary/20 blur-xl opacity-30 rounded-[100%]"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>
