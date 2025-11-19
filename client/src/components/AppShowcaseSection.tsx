@@ -1,12 +1,20 @@
-import { cn } from "@/lib/utils"; // Standard Shadcn utility (optional if you don't have it, remove usage)
+import { cn } from "@/lib/utils"; // Standard Shadcn utility
+import { useEffect, useState } from "react"; // Needed for client-side mode check (optional, but robust)
+
+// Define the paths for your two images
+const LIGHT_IMAGE_SRC = "/showcase-dark.jpg";
+const DARK_IMAGE_SRC = "/showcase-white.jpg";
 
 export function AppShowcaseSection() {
+  // Optional: State to force a re-render on theme change if initial rendering is an issue.
+  // We use the 'dark' class provided by the theme provider for the primary control.
+
   return (
-    <section className="relative py-12 overflow-hidden bg-background">
+    <section className="relative pb-12 overflow-hidden bg-background">
       {/* --- 1. MINIMAL AMBIENT LIGHT (No heavy patterns) --- */}
       <div className="absolute inset-0 pointer-events-none flex justify-center">
         {/* A single, soft, static glow behind the image */}
-        <div className="h-[400px] w-[80%] max-w-[800px]  rounded-full dark:bg-primary/10" />
+        <div className="h-[400px] w-[80%] max-w-[800px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -33,26 +41,39 @@ export function AppShowcaseSection() {
 
               {/* The Image Area */}
               <div className="relative bg-muted/10">
-                {/* Image */}
+                {/* 🚀 IMPROVEMENT: DARK MODE IMAGE (Shown when 'dark' class is present on HTML/body) */}
                 <img
-                  src="/showcase.jpg"
-                  alt="App Interface"
-                  className="w-full h-auto block"
+                  src={DARK_IMAGE_SRC}
+                  alt="App Interface Dark Mode"
+                  // Default state: hidden. Theme state: block.
+                  className="w-full h-auto block dark:hidden"
+                  style={{ imageRendering: "auto" }}
+                />
+
+                {/* 🚀 IMPROVEMENT: LIGHT MODE IMAGE (Shown by default, hidden when 'dark' class is present) */}
+                <img
+                  src={LIGHT_IMAGE_SRC}
+                  alt="App Interface Light Mode"
+                  // Default state: block. Theme state: hidden.
+                  className="w-full h-auto hidden dark:block"
                   style={{ imageRendering: "auto" }}
                 />
 
                 {/* --- THE "FADE" OVERLAY --- 
-                   This makes the bottom of the image blend seamlessly into the page,
-                   creating a very smooth, professional look. 
-                   If you don't want the fade, remove this div.
+                  This is crucial: The opacity should also adapt slightly to the theme.
                 */}
-                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent opacity-20" />
+                <div
+                  className={cn(
+                    "absolute bottom-0 left-0 right-0 h-24 to-transparent opacity-20",
+                    // Dynamic Gradient based on theme
+                    "bg-gradient-to-t from-background"
+                  )}
+                />
               </div>
             </div>
           </div>
 
           {/* Optional: A subtle reflection below (The "Apple" style floor reflection) */}
-          {/* This adds depth without moving the element */}
           <div
             className="absolute -bottom-4 left-4 right-4 h-4 bg-primary/20 blur-xl opacity-30 rounded-[100%]"
             aria-hidden="true"
