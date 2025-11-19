@@ -6,19 +6,22 @@ const steps = [
     number: "1",
     icon: LinkIcon,
     title: "Paste YouTube URL",
-    description: "Copy any YouTube video link and paste it into ReelCutter. We'll load the video instantly.",
+    description:
+      "Copy any YouTube video link and paste it into ReelCutter. We'll load the video instantly.",
   },
   {
     number: "2",
     icon: Scissors,
     title: "Select Your Segment",
-    description: "Use our visual timeline or type exact timestamps. Pick the perfect clip in seconds.",
+    description:
+      "Use our visual timeline or type exact timestamps. Pick the perfect clip in seconds.",
   },
   {
     number: "3",
     icon: Download,
     title: "Download & Share",
-    description: "Get your optimized video segment ready for TikTok, Reels, or Shorts. It's that easy!",
+    description:
+      "Get your optimized video segment ready for TikTok, Reels, or Shorts. It's that easy!",
   },
 ];
 
@@ -38,7 +41,11 @@ export function HowItWorksSection() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center" data-testid={`step-${index}`}>
+              <div
+                key={index}
+                className="flex flex-col items-center"
+                data-testid={`step-${index}`}
+              >
                 <Card className="w-full hover-elevate transition-all duration-200">
                   <CardContent className="p-8 text-center">
                     <div className="flex justify-center mb-6">
@@ -58,12 +65,6 @@ export function HowItWorksSection() {
                     </p>
                   </CardContent>
                 </Card>
-                
-                {index < steps.length - 1 && (
-                  <div className="hidden md:flex items-center justify-center my-4">
-                    <ArrowRight className="w-8 h-8 text-primary/40" />
-                  </div>
-                )}
               </div>
             ))}
           </div>

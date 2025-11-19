@@ -289,10 +289,11 @@ export function VideoEditor() {
 
   return (
     <section
-      className="min-h-screen bg-background text-foreground py-12 lg:py-24 font-sans selection:bg-primary/20 selection:text-primary"
+      className=" bg-background text-foreground py-12 lg:py-24 font-sans selection:bg-primary/20 selection:text-primary"
       onMouseUp={handleDragEnd}
       onMouseLeave={handleDragEnd}
       onTouchEnd={handleDragEnd}
+      id="video-editor"
     >
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header Section */}

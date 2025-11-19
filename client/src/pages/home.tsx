@@ -6,6 +6,7 @@ import { SocialProofSection } from "@/components/social-proof-section";
 import { VideoEditor } from "@/components/video-editor";
 import { FAQSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
+import { AppShowcaseSection } from "@/components/AppShowcaseSection";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
+        <AppShowcaseSection />
         <FeaturesSection />
         <HowItWorksSection />
         <SocialProofSection />

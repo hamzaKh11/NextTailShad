@@ -1,11 +1,4 @@
-import {
-  Scissors,
-  Crop,
-  Clock,
-  Download,
-  Zap,
-  Infinity,
-} from "lucide-react";
+import { Scissors, Crop, Clock, Download, Zap, Infinity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
@@ -59,7 +52,8 @@ export function FeaturesSection() {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional video editing tools, simplified for creators who value speed and quality.
+            Professional video editing tools, simplified for creators who value
+            speed and quality.
           </p>
         </div>
 
@@ -76,7 +70,9 @@ export function FeaturesSection() {
                     <feature.icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {feature.description}
                     </p>
